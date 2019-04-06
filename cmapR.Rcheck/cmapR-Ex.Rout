@@ -1,0 +1,84 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "cmapR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('cmapR')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("align_matrices")
+> ### * align_matrices
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: align_matrices
+> ### Title: Align the rows and columns of two (or more) matrices
+> ### Aliases: align_matrices
+> 
+> ### ** Examples
+> 
+> # construct some example matrices
+> m1 <- matrix(rnorm(20), nrow=4)
+> rownames(m1) <- letters[1:4]
+> colnames(m1) <- LETTERS[1:5]
+> m2 <- matrix(rnorm(20), nrow=5)
+> rownames(m2) <- letters[1:5]
+> colnames(m2) <- LETTERS[1:4]
+> m1
+           A          B          C           D           E
+a -0.6264538  0.3295078  0.5757814 -0.62124058 -0.01619026
+b  0.1836433 -0.8204684 -0.3053884 -2.21469989  0.94383621
+c -0.8356286  0.4874291  1.5117812  1.12493092  0.82122120
+d  1.5952808  0.7383247  0.3898432 -0.04493361  0.59390132
+> m2
+            A           B           C          D
+a  0.91897737 -0.05612874  1.35867955 -0.4149946
+b  0.78213630 -0.15579551 -0.10278773 -0.3942900
+c  0.07456498 -1.47075238  0.38767161 -0.0593134
+d -1.98935170 -0.47815006 -0.05380504  1.1000254
+e  0.61982575  0.41794156 -1.37705956  0.7631757
+> 
+> # align them, padding with NA and returning a 3D array
+> align_matrices(m1, m2)
+, , 1
+
+           A          B          C           D           E
+a -0.6264538  0.3295078  0.5757814 -0.62124058 -0.01619026
+b  0.1836433 -0.8204684 -0.3053884 -2.21469989  0.94383621
+c -0.8356286  0.4874291  1.5117812  1.12493092  0.82122120
+d  1.5952808  0.7383247  0.3898432 -0.04493361  0.59390132
+e         NA         NA         NA          NA          NA
+
+, , 2
+
+            A           B           C          D  E
+a  0.91897737 -0.05612874  1.35867955 -0.4149946 NA
+b  0.78213630 -0.15579551 -0.10278773 -0.3942900 NA
+c  0.07456498 -1.47075238  0.38767161 -0.0593134 NA
+d -1.98935170 -0.47815006 -0.05380504  1.1000254 NA
+e  0.61982575  0.41794156 -1.37705956  0.7631757 NA
+
+> 
+> # align them, not padding and retuning a list
+> align_matrices(m1, m2, na.pad=F, as.3D=F)
+Error in align_matrices(m1, m2, na.pad = F, as.3D = F) : 
+  F used instead of FALSE
+Execution halted

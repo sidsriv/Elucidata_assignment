@@ -1,0 +1,46 @@
+align_matrices          Align the rows and columns of two (or more)
+                        matrices
+annotate.gct            Add annotations to a GCT object
+cdesc_char              An example table of metadata, as would be
+                        parsed from or parse.gctx. Initially all the
+                        columns are of type character.
+check_colnames          Check whether 'test_names' are columns in the
+                        'data.frame' df
+check_dups              Check for duplicates in a vector
+distil                  Collapse the rows or columns of a matrix using
+                        weighted averaging
+ds                      An example of a GCT object with row and column
+                        metadata and gene expression values in the
+                        matrix.
+extract.gct             Exract elements from a GCT matrix
+gene_set                An example collection of gene sets as used in
+                        the Lamb 2006 CMap paper.
+is.wholenumber          Check if x is a whole number
+kd_gct                  An example GCT object of knockdown experiments
+                        targeting a subset of landmark genes.
+melt.gct                Transform a GCT object in to a long form
+                        'data.table' (aka 'melt')
+merge.gct               Merge two GCT objects together
+na_pad_matrix           Pad a matrix with additional rows/columns of NA
+                        values
+parse.gctx              Parse a GCTX file into the workspace as a GCT
+                        object
+parse.gmt               Read a GMT file and return a list
+parse.gmx               Read a GMX file and return a list
+parse.grp               Read a GRP file and return a vector of its
+                        contents
+rank.gct                Convert a GCT object's matrix to ranks
+read.gctx.ids           Read GCTX row or column ids
+read.gctx.meta          Parse row or column metadata from GCTX files
+robust.zscore           Compoute robust z-scores
+subset.gct              Subset a gct object using the provided row and
+                        column ids
+threshold               Threshold a numeric vector
+transpose.gct           Transpose a GCT object
+update.gctx             Update the matrix of an existing GCTX file
+write.gct               Write a GCT object to disk in GCT format
+write.gctx              Write a GCT object to disk in GCTX format
+write.gmt               Write a nested list to a GMT file
+write.grp               Write a vector to a GRP file
+write.tbl               Write a 'data.frame' to a tab-delimited text
+                        file

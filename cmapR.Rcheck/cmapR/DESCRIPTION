@@ -1,0 +1,16 @@
+Package: cmapR
+Type: Package
+Title: CMap tools in R
+Version: 1.0.1
+Date: 2018-01-30
+Author: CMap Group at The Broad Institute
+Maintainer: <clue@broadinstitute.org>
+Description: CMAP tools in R
+License: BSD
+LazyData: true
+Depends: R (>= 3.2.0)
+Imports: methods, rhdf5, data.table
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2019-04-05 09:40:44 UTC; sid
+Built: R 3.4.4; ; 2019-04-05 09:40:51 UTC; unix

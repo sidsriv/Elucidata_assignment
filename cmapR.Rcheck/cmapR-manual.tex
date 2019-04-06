@@ -1,0 +1,1339 @@
+\nonstopmode{}
+\documentclass[letterpaper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8,latin1]{inputenc}
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `cmapR'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{CMap tools in R}
+\item[Version]\AsIs{1.0.1}
+\item[Date]\AsIs{2018-01-30}
+\item[Author]\AsIs{CMap Group at The Broad Institute}
+\item[Maintainer]\AsIs{}\email{clue@broadinstitute.org}\AsIs{}
+\item[Description]\AsIs{CMAP tools in R}
+\item[License]\AsIs{BSD}
+\item[LazyData]\AsIs{true}
+\item[Depends]\AsIs{R (>= 3.2.0)}
+\item[Imports]\AsIs{methods, rhdf5, data.table}
+\item[RoxygenNote]\AsIs{6.1.1}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{align\_matrices}{Align the rows and columns of two (or more) matrices}{align.Rul.matrices}
+%
+\begin{Description}\relax
+Align the rows and columns of two (or more) matrices
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+align_matrices(m1, m2, ..., L = NULL, na.pad = T, as.3D = T)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{m1}] a matrix with unique row and column names
+
+\item[\code{m2}] a matrix with unique row and column names
+
+\item[\code{...}] additional matrices with unique row and
+column names
+
+\item[\code{L}] a list of matrix objects. If this is given,
+m1, m2, and ... are ignored
+
+\item[\code{na.pad}] boolean indicating whether to pad the
+combined matrix with NAs for rows/columns that are
+not shared by m1 and m2.
+
+\item[\code{as.3D}] boolean indicating whether to return the
+result as a 3D array. If FALSE, will return a list.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+an object containing the aligned matrices. Will
+either be a list or a 3D array
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# construct some example matrices
+m1 <- matrix(rnorm(20), nrow=4)
+rownames(m1) <- letters[1:4]
+colnames(m1) <- LETTERS[1:5]
+m2 <- matrix(rnorm(20), nrow=5)
+rownames(m2) <- letters[1:5]
+colnames(m2) <- LETTERS[1:4]
+m1
+m2
+
+# align them, padding with NA and returning a 3D array
+align_matrices(m1, m2)
+
+# align them, not padding and retuning a list
+align_matrices(m1, m2, na.pad=F, as.3D=F)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{annotate.gct}{Add annotations to a GCT object}{annotate.gct}
+%
+\begin{Description}\relax
+Given a GCT object and either a \code{\LinkA{data.frame}{data.frame}} or
+a path to an annotation table, apply the annotations to the
+gct using the given \code{keyfield}.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+annotate.gct(g, annot, dimension = "row", keyfield = "id")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] a GCT object
+
+\item[\code{annot}] a \code{\LinkA{data.frame}{data.frame}} or path to text table of annotations
+
+\item[\code{dimension}] either 'row' or 'column' indicating which dimension
+of \code{g} to annotate
+
+\item[\code{keyfield}] the character name of the column in \code{annot} that 
+matches the row or column identifiers in \code{g}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a GCT object with annotations applied to the specified
+dimension
+\end{Value}
+%
+\begin{SeeAlso}\relax
+Other GCT utilities: \code{\LinkA{melt.gct}{melt.gct}},
+\code{\LinkA{merge.gct}{merge.gct}}, \code{\LinkA{rank.gct}{rank.gct}},
+\code{\LinkA{subset.gct}{subset.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+ g <- parse.gctx('/path/to/gct/file')
+ g <- annotate.gct(g, '/path/to/annot')
+
+## End(Not run)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{cdesc\_char}{An example table of metadata, as would be parsed from or parse.gctx. Initially all the columns are of type character.}{cdesc.Rul.char}
+\keyword{datasets}{cdesc\_char}
+%
+\begin{Description}\relax
+An example table of metadata, as would be
+parsed from or parse.gctx. Initially all the
+columns are of type character.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+cdesc_char
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+An object of class \code{data.frame} with 368 rows and 8 columns.
+\end{Format}
+\inputencoding{utf8}
+\HeaderA{check\_colnames}{Check whether \code{test\_names} are columns in the \code{\LinkA{data.frame}{data.frame}} df}{check.Rul.colnames}
+%
+\begin{Description}\relax
+Check whether \code{test\_names} are columns in the \code{\LinkA{data.frame}{data.frame}} df
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+check_colnames(test_names, df, throw_error = T)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{test\_names}] a vector of column names to test
+
+\item[\code{df}] the \code{\LinkA{data.frame}{data.frame}} to test against
+
+\item[\code{throw\_error}] boolean indicating whether to throw an error if
+any \code{test\_names} are not found in \code{df}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+boolean indicating whether or not all \code{test\_names} are
+columns of \code{df}
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+check_colnames(c("pert_id", "pert_iname"), cdesc_char)            # TRUE
+check_colnames(c("pert_id", "foobar"), cdesc_char, throw_error=FALSE) # FALSE, suppress error
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{check\_dups}{Check for duplicates in a vector}{check.Rul.dups}
+%
+\begin{Description}\relax
+Check for duplicates in a vector
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+check_dups(x, name = "")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] the vector
+
+\item[\code{name}] the name of the object to print
+in an error message if duplicates are found
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+check_dups(c("a", "b", "c", "a", "d"))
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{distil}{Collapse the rows or columns of a matrix using   weighted averaging}{distil}
+%
+\begin{Description}\relax
+This is equivalent to the 'modz' procedure
+used in collapsing replicates in traditional L1000
+data processing. The weight for each replicate is
+computed as its normalized average correlation to
+the other replicates in the set.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+distil(m, dimension = "col", method = "spearman")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{m}] a numeric matrix where the rows or columns are
+assumed to be replicates
+
+\item[\code{dimension}] the dimension to collapse. either 'row'
+or 'col'
+
+\item[\code{method}] the correlation method to use
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a list with the following elements
+\begin{description}
+
+\item[values] a vector of the collapsed values
+\item[correlations] a vector of the pairwise correlations
+\item[weights] a vector of the computed weights
+
+\end{description}
+
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+m <- matrix(rnorm(30), ncol=3)
+distil(m)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ds}{An example of a GCT object with row and column metadata and gene expression values in the matrix.}{ds}
+\keyword{datasets}{ds}
+%
+\begin{Description}\relax
+An example of a GCT object with row and
+column metadata and gene expression values
+in the matrix.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ds
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+An object of class \code{GCT} with 978 rows and 272 columns.
+\end{Format}
+\inputencoding{utf8}
+\HeaderA{extract.gct}{Exract elements from a GCT matrix}{extract.gct}
+%
+\begin{Description}\relax
+extract the elements from a \code{GCT} object
+where the values of \code{row\_field} and \code{col\_field}
+are the same. A concrete example is if \code{g} represents
+a matrix of signatures of genetic perturbations, and you wan
+to extract all the values of the targeted genes.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+extract.gct(g, row_field, col_field, rdesc = NULL, cdesc = NULL,
+  row_keyfield = "id", col_keyfield = "id")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] the GCT object
+
+\item[\code{row\_field}] the column name in rdesc to search on
+
+\item[\code{col\_field}] the column name in cdesc to search on
+
+\item[\code{rdesc}] a \code{data.frame} of row annotations
+
+\item[\code{cdesc}] a \code{data.frame} of column annotations
+
+\item[\code{row\_keyfield}] the column name of \code{rdesc} to use
+for annotating the rows of \code{g}
+
+\item[\code{col\_keyfield}] the column name of \code{cdesc} to use
+for annotating the rows of \code{g}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a list of the following elements
+\begin{description}
+
+\item[mask] a logical matrix of the same dimensions as
+\code{ds@mat} indicating which matrix elements have
+been extracted
+\item[idx] an array index into \code{ds@mat}
+representing which elements have been extracted
+\item[vals] a vector of the extracted values
+
+\end{description}
+
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# get the values for all targeted genes from a 
+# dataset of knockdown experiments 
+res <- extract.gct(kd_gct, row_field="pr_gene_symbol", col_field="pert_mfc_desc")
+str(res)
+stats::quantile(res$vals)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{gene\_set}{An example collection of gene sets as used in the Lamb 2006 CMap paper.}{gene.Rul.set}
+\keyword{datasets}{gene\_set}
+%
+\begin{Description}\relax
+An example collection of gene sets
+as used in the Lamb 2006 CMap paper.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+gene_set
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+An object of class \code{list} of length 8.
+\end{Format}
+%
+\begin{Source}\relax
+Lamb et al 2006 doi:10.1126/science.1132939
+\end{Source}
+\inputencoding{utf8}
+\HeaderA{is.wholenumber}{Check if x is a whole number}{is.wholenumber}
+%
+\begin{Description}\relax
+Check if x is a whole number
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+is.wholenumber(x, tol = .Machine$double.eps^0.5)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] number to test
+
+\item[\code{tol}] the allowed tolerance
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+boolean indicating whether x is tol away from a whole number value
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+is.wholenumber(1)
+is.wholenumber(0.5)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{kd\_gct}{An example GCT object of knockdown experiments targeting a subset of landmark genes.}{kd.Rul.gct}
+\keyword{datasets}{kd\_gct}
+%
+\begin{Description}\relax
+An example GCT object of knockdown experiments
+targeting a subset of landmark genes.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+kd_gct
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+An object of class \code{GCT} with 976 rows and 374 columns.
+\end{Format}
+\inputencoding{utf8}
+\HeaderA{melt.gct}{Transform a GCT object in to a long form \code{\LinkA{data.table}{data.table}} (aka 'melt')}{melt.gct}
+%
+\begin{Description}\relax
+Utilizes the \code{\LinkA{data.table::melt}{data.table::melt}} function to transform the
+matrix into long form. Optionally can include the row and column
+annotations in the transformed \code{\LinkA{data.table}{data.table}}.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+melt.gct(g, suffixes = NULL, remove_symmetries = F, keep_rdesc = T,
+  keep_cdesc = T, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] the GCT object
+
+\item[\code{suffixes}] the character suffixes to be applied if there are
+collisions between the names of the row and column descriptors
+
+\item[\code{remove\_symmetries}] boolean indicating whether to remove
+the lower triangle of the matrix (only applies if \code{g@mat} is symmetric)
+
+\item[\code{keep\_rdesc}] boolean indicating whether to keep the row
+descriptors in the final result
+
+\item[\code{keep\_cdesc}] boolean indicating whether to keep the column
+descriptors in the final result
+
+\item[\code{...}] further arguments passed along to \code{data.table::merge}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a \code{\LinkA{data.table}{data.table}} object with the row and column ids and the matrix
+values and (optinally) the row and column descriptors
+\end{Value}
+%
+\begin{SeeAlso}\relax
+Other GCT utilities: \code{\LinkA{annotate.gct}{annotate.gct}},
+\code{\LinkA{merge.gct}{merge.gct}}, \code{\LinkA{rank.gct}{rank.gct}},
+\code{\LinkA{subset.gct}{subset.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# simple melt, keeping both row and column meta
+head(melt.gct(ds))
+
+# update row/colum suffixes to indicate rows are genes, columns experiments
+head(melt.gct(ds, suffixes = c("_gene", "_experiment")))
+
+# ignore row/column meta
+head(melt.gct(ds, keep_rdesc = FALSE, keep_cdesc = FALSE))
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{merge.gct}{Merge two GCT objects together}{merge.gct}
+%
+\begin{Description}\relax
+Merge two GCT objects together
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+merge.gct(g1, g2, dimension = "row", matrix_only = F)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g1}] the first GCT object
+
+\item[\code{g2}] the second GCT object
+
+\item[\code{dimension}] the dimension on which to merge (row or column)
+
+\item[\code{matrix\_only}] boolean idicating whether to keep only the
+data matrices from \code{g1} and \code{g2} and ignore their
+row and column meta data
+\end{ldescription}
+\end{Arguments}
+%
+\begin{SeeAlso}\relax
+Other GCT utilities: \code{\LinkA{annotate.gct}{annotate.gct}},
+\code{\LinkA{melt.gct}{melt.gct}}, \code{\LinkA{rank.gct}{rank.gct}},
+\code{\LinkA{subset.gct}{subset.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# take the first 10 and last 10 rows of an object
+# and merge them back together
+(a <- subset.gct(ds, rid=1:10))
+(b <- subset.gct(ds, rid=969:978))
+(merged <- merge.gct(a, b, dimension="row"))
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{na\_pad\_matrix}{Pad a matrix with additional rows/columns of NA values}{na.Rul.pad.Rul.matrix}
+%
+\begin{Description}\relax
+Pad a matrix with additional rows/columns of NA values
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+na_pad_matrix(m, row_universe = NULL, col_universe = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{m}] a matrix with unique row and column names
+
+\item[\code{row\_universe}] a vector with the universe of possible
+row names
+
+\item[\code{col\_universe}] a vector with the universe of possible
+column names
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a matrix
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+m <- matrix(rnorm(10), nrow=2)
+rownames(m) <- c("A", "B")
+colnames(m) <- letters[1:5]
+na_pad_matrix(m, row_universe=LETTERS, col_universe=letters)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{parse.gctx}{Parse a GCTX file into the workspace as a GCT object}{parse.gctx}
+%
+\begin{Description}\relax
+Parse a GCTX file into the workspace as a GCT object
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+parse.gctx(fname, rid = NULL, cid = NULL, set_annot_rownames = F,
+  matrix_only = F)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{fname}] path to the GCTX file on disk
+
+\item[\code{rid}] either a vector of character or integer
+row indices or a path to a grp file containing character
+row indices. Only these indicies will be parsed from the
+file.
+
+\item[\code{cid}] either a vector of character or integer
+column indices or a path to a grp file containing character
+column indices. Only these indicies will be parsed from the
+file.
+
+\item[\code{set\_annot\_rownames}] boolean indicating whether to set the
+rownames on the row/column metadata data.frames. Set this to 
+false if the GCTX file has duplicate row/column ids.
+
+\item[\code{matrix\_only}] boolean indicating whether to parse only
+the matrix (ignoring row and column annotations)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+\code{parse.gctx} also supports parsing of plain text
+GCT files, so this function can be used as a general GCT parser.
+\end{Details}
+%
+\begin{SeeAlso}\relax
+Other GCTX parsing functions: \code{\LinkA{append.dim}{append.dim}},
+\code{\LinkA{fix.datatypes}{fix.datatypes}}, \code{\LinkA{process\_ids}{process.Rul.ids}},
+\code{\LinkA{read.gctx.ids}{read.gctx.ids}},
+\code{\LinkA{read.gctx.meta}{read.gctx.meta}},
+\code{\LinkA{write.gctx.meta}{write.gctx.meta}}, \code{\LinkA{write.gctx}{write.gctx}},
+\code{\LinkA{write.gct}{write.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+gct_file <- system.file("extdata", "modzs_n272x978.gctx", package="cmapR")
+(ds <- parse.gctx(gct_file))
+
+# matrix only
+(ds <- parse.gctx(gct_file, matrix_only=TRUE))
+
+# only the first 10 rows and columns
+(ds <- parse.gctx(gct_file, rid=1:10, cid=1:10))
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{parse.gmt}{Read a GMT file and return a list}{parse.gmt}
+%
+\begin{Description}\relax
+Read a GMT file and return a list
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+parse.gmt(fname)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{fname}] the file path to be parsed
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+\code{parse.gmt} returns a nested list object. The top
+level contains one list per row in \code{fname}. Each of 
+these is itself a list with the following fields:
+- \code{head}: the name of the data (row in \code{fname})
+- \code{desc}: description of the corresponding data
+- \code{len}: the number of data items
+- \code{entry}: a vector of the data items
+\end{Details}
+%
+\begin{Value}
+a list of the contents of \code{fname}. See details.
+\end{Value}
+%
+\begin{SeeAlso}\relax
+\LinkA{http://clue.io/help}{http://clue.io/help} for details on the GMT file format
+
+Other CMap parsing functions: \code{\LinkA{parse.gmx}{parse.gmx}},
+\code{\LinkA{parse.grp}{parse.grp}}, \code{\LinkA{write.gmt}{write.gmt}},
+\code{\LinkA{write.grp}{write.grp}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+gmt_path <- system.file("extdata", "query_up.gmt", package="cmapR")
+gmt <- parse.gmt(gmt_path)
+str(gmt)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{parse.gmx}{Read a GMX file and return a list}{parse.gmx}
+%
+\begin{Description}\relax
+Read a GMX file and return a list
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+parse.gmx(fname)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{fname}] the file path to be parsed
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+\code{parse.gmx} returns a nested list object. The top
+level contains one list per column in \code{fname}. Each of 
+these is itself a list with the following fields:
+- \code{head}: the name of the data (column in \code{fname})
+- \code{desc}: description of the corresponding data
+- \code{len}: the number of data items
+- \code{entry}: a vector of the data items
+\end{Details}
+%
+\begin{Value}
+a list of the contents of \code{fname}. See details.
+\end{Value}
+%
+\begin{SeeAlso}\relax
+\LinkA{http://clue.io/help}{http://clue.io/help} for details on the GMX file format
+
+Other CMap parsing functions: \code{\LinkA{parse.gmt}{parse.gmt}},
+\code{\LinkA{parse.grp}{parse.grp}}, \code{\LinkA{write.gmt}{write.gmt}},
+\code{\LinkA{write.grp}{write.grp}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+gmx_path <- system.file("extdata", "lm_probes.gmx", package="cmapR")
+gmx <- parse.gmx(gmx_path)
+str(gmx)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{parse.grp}{Read a GRP file and return a vector of its contents}{parse.grp}
+%
+\begin{Description}\relax
+Read a GRP file and return a vector of its contents
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+parse.grp(fname)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{fname}] the file path to be parsed
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector of the contents of \code{fname}
+\end{Value}
+%
+\begin{SeeAlso}\relax
+\LinkA{http://clue.io/help}{http://clue.io/help} for details on the GRP file format
+
+Other CMap parsing functions: \code{\LinkA{parse.gmt}{parse.gmt}},
+\code{\LinkA{parse.gmx}{parse.gmx}}, \code{\LinkA{write.gmt}{write.gmt}},
+\code{\LinkA{write.grp}{write.grp}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+grp_path <- system.file("extdata", "lm_epsilon_n978.grp", package="cmapR")
+values <- parse.grp(grp_path)
+str(values)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{rank.gct}{Convert a GCT object's matrix to ranks}{rank.gct}
+%
+\begin{Description}\relax
+Convert a GCT object's matrix to ranks
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+rank.gct(g, dim = "col")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] the \code{GCT} object to rank
+
+\item[\code{dim}] the dimension along which to rank
+(row or column)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a modified version of \code{g}, with the
+values in the matrix converted to ranks
+\end{Value}
+%
+\begin{SeeAlso}\relax
+Other GCT utilities: \code{\LinkA{annotate.gct}{annotate.gct}},
+\code{\LinkA{melt.gct}{melt.gct}}, \code{\LinkA{merge.gct}{merge.gct}},
+\code{\LinkA{subset.gct}{subset.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+(ranked <- rank.gct(ds, dim="column"))
+# scatter rank vs. score for a few columns
+plot(ds@mat[, 1:3], ranked@mat[, 1:3],
+  xlab="score", ylab="rank")
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{read.gctx.ids}{Read GCTX row or column ids}{read.gctx.ids}
+%
+\begin{Description}\relax
+Read GCTX row or column ids
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+read.gctx.ids(gctx_path, dimension = "row")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{gctx\_path}] path to the GCTX file
+
+\item[\code{dimension}] which ids to read (row or column)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a character vector of row or column ids from the provided file
+\end{Value}
+%
+\begin{SeeAlso}\relax
+Other GCTX parsing functions: \code{\LinkA{append.dim}{append.dim}},
+\code{\LinkA{fix.datatypes}{fix.datatypes}}, \code{\LinkA{parse.gctx}{parse.gctx}},
+\code{\LinkA{process\_ids}{process.Rul.ids}}, \code{\LinkA{read.gctx.meta}{read.gctx.meta}},
+\code{\LinkA{write.gctx.meta}{write.gctx.meta}}, \code{\LinkA{write.gctx}{write.gctx}},
+\code{\LinkA{write.gct}{write.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+gct_file <- system.file("extdata", "modzs_n272x978.gctx", package="cmapR")
+# row ids
+rid <- read.gctx.ids(gct_file)
+head(rid)
+# column ids
+cid <- read.gctx.ids(gct_file, dimension="column")
+head(cid)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{read.gctx.meta}{Parse row or column metadata from GCTX files}{read.gctx.meta}
+%
+\begin{Description}\relax
+Parse row or column metadata from GCTX files
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+read.gctx.meta(gctx_path, dimension = "row", ids = NULL,
+  set_annot_rownames = T)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{gctx\_path}] the path to the GCTX file
+
+\item[\code{dimension}] which metadata to read (row or column)
+
+\item[\code{ids}] a character vector of a subset of row/column ids
+for which to read the metadata
+
+\item[\code{set\_annot\_rownames}] a boolean indicating whether to set the 
+\code{rownames} addtribute of the returned \code{data.frame} to
+the corresponding row/column ids.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a \code{data.frame} of metadata
+\end{Value}
+%
+\begin{SeeAlso}\relax
+Other GCTX parsing functions: \code{\LinkA{append.dim}{append.dim}},
+\code{\LinkA{fix.datatypes}{fix.datatypes}}, \code{\LinkA{parse.gctx}{parse.gctx}},
+\code{\LinkA{process\_ids}{process.Rul.ids}}, \code{\LinkA{read.gctx.ids}{read.gctx.ids}},
+\code{\LinkA{write.gctx.meta}{write.gctx.meta}}, \code{\LinkA{write.gctx}{write.gctx}},
+\code{\LinkA{write.gct}{write.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+gct_file <- system.file("extdata", "modzs_n272x978.gctx", package="cmapR") 
+# row meta
+row_meta <- read.gctx.meta(gct_file)
+str(row_meta)
+# column meta
+col_meta <- read.gctx.meta(gct_file, dimension="column")
+str(col_meta)
+# now for only the first 10 ids
+col_meta_first10 <- read.gctx.meta(gct_file, dimension="column", ids=col_meta$id[1:10])
+str(col_meta_first10)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{robust.zscore}{Compoute robust z-scores}{robust.zscore}
+%
+\begin{Description}\relax
+robust zscore implementation
+takes in a 1D vector, returns 1D vector
+after computing robust zscores
+rZ = (x-med(x))/mad(x)
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+robust.zscore(x, min_mad = 1e-06, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] numeric vector to z-score
+
+\item[\code{min\_mad}] the minimum allowed MAD,
+useful for avoiding division by very
+small numbers
+
+\item[\code{...}] further options to median, max functions
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+transformed version of x
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+(x <- rnorm(25))
+(robust.zscore(x))
+
+# with min_mad
+(robust.zscore(x, min_mad=1e-4))
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{subset.gct}{Subset a gct object using the provided row and column ids}{subset.gct}
+%
+\begin{Description}\relax
+Subset a gct object using the provided row and column ids
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+subset.gct(g, rid = NULL, cid = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] a gct object
+
+\item[\code{rid}] a vector of character ids or integer indices for ROWS
+
+\item[\code{cid}] a vector of character ids or integer indices for COLUMNS
+\end{ldescription}
+\end{Arguments}
+%
+\begin{SeeAlso}\relax
+Other GCT utilities: \code{\LinkA{annotate.gct}{annotate.gct}},
+\code{\LinkA{melt.gct}{melt.gct}}, \code{\LinkA{merge.gct}{merge.gct}},
+\code{\LinkA{rank.gct}{rank.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# first 10 rows and columns by index
+(a <- subset.gct(ds, rid=1:10, cid=1:10))
+
+# first 10 rows and columns using character ids
+(b <- subset.gct(ds, rid=ds@rid[1:10], cid=ds@cid[1:10]))
+
+identical(a, b) # TRUE
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{threshold}{Threshold a numeric vector}{threshold}
+%
+\begin{Description}\relax
+Threshold a numeric vector
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+threshold(x, minval, maxval)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] the vector
+
+\item[\code{minval}] minium allowed value
+
+\item[\code{maxval}] maximum allowed value
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a thresholded version of \code{x}
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+x <- rnorm(20)
+threshold(x, -0.1, -0.1)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{transpose.gct}{Transpose a GCT object}{transpose.gct}
+%
+\begin{Description}\relax
+Transpose a GCT object
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+transpose.gct(g)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{g}] the \code{GCT} object
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a modified verion of the input \code{GCT} object
+where the matrix has been transposed and the row and column
+ids and annotations have been swapped.
+\end{Value}
+%
+\begin{Examples}
+\begin{ExampleCode}
+transpose.gct(ds)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{update.gctx}{Update the matrix of an existing GCTX file}{update.gctx}
+%
+\begin{Description}\relax
+Update the matrix of an existing GCTX file
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'gctx'
+update(x, ofile, rid = NULL, cid = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] an array of data
+
+\item[\code{ofile}] the filename of the GCTX to update
+
+\item[\code{rid}] integer indices or character ids of the rows
+to update
+
+\item[\code{cid}] integer indices or character ids of the columns
+to update
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Overwrite the rows and columns of \code{ofile} 
+as indicated by \code{rid} and \code{cid} respectively.
+\code{rid} and \code{cid} can either be integer indices
+or character ids corresponding to the row and column ids
+in \code{ofile}.
+\end{Details}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+m <- matrix(rnorm(20), nrow=10)
+# update by integer indices
+update.gctx(m, ofile="my.gctx", rid=1:10, cid=1:2)
+# update by character ids
+row_ids <- letters[1:10]
+col_ids <- LETTERS[1:2]
+update.gctx(m, ofile="my.gctx", rid=row_ids, cid=col_ids)
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{write.gct}{Write a GCT object to disk in GCT format}{write.gct}
+%
+\begin{Description}\relax
+Write a GCT object to disk in GCT format
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+write.gct(ds, ofile, precision = 4, appenddim = T, ver = 3)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{ds}] the GCT object
+
+\item[\code{ofile}] the desired output filename
+
+\item[\code{precision}] the numeric precision at which to
+save the matrix. See \code{details}.
+
+\item[\code{appenddim}] boolean indicating whether to append
+matrix dimensions to filename
+
+\item[\code{ver}] the GCT version to write. See \code{details}.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Since GCT is text format, the higher \code{precision}
+you choose, the larger the file size.
+\code{ver} is assumed to be 3, aka GCT version 1.3, which supports
+embedded row and column metadata in the GCT file. Any other value
+passed to \code{ver} will result in a GCT version 1.2 file which
+contains only the matrix data and no annotations.
+\end{Details}
+%
+\begin{SeeAlso}\relax
+Other GCTX parsing functions: \code{\LinkA{append.dim}{append.dim}},
+\code{\LinkA{fix.datatypes}{fix.datatypes}}, \code{\LinkA{parse.gctx}{parse.gctx}},
+\code{\LinkA{process\_ids}{process.Rul.ids}}, \code{\LinkA{read.gctx.ids}{read.gctx.ids}},
+\code{\LinkA{read.gctx.meta}{read.gctx.meta}},
+\code{\LinkA{write.gctx.meta}{write.gctx.meta}}, \code{\LinkA{write.gctx}{write.gctx}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+write.gct(ds, "dataset", precision=2)
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{write.gctx}{Write a GCT object to disk in GCTX format}{write.gctx}
+%
+\begin{Description}\relax
+Write a GCT object to disk in GCTX format
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+write.gctx(ds, ofile, appenddim = T, compression_level = 0,
+  matrix_only = F, max_chunk_kb = 1024)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{ds}] a GCT object
+
+\item[\code{ofile}] the desired file path for writing
+
+\item[\code{appenddim}] boolean indicating whether the
+resulting filename will have dimensions appended
+(e.g. my\_file\_n384x978.gctx)
+
+\item[\code{compression\_level}] integer between 1-9 indicating
+how much to compress data before writing. Higher values
+result in smaller files but slower read times.
+
+\item[\code{matrix\_only}] boolean indicating whether to write
+only the matrix data (and skip row, column annotations)
+
+\item[\code{max\_chunk\_kb}] for chunking, the maximum number of KB
+a given chunk will occupy
+\end{ldescription}
+\end{Arguments}
+%
+\begin{SeeAlso}\relax
+Other GCTX parsing functions: \code{\LinkA{append.dim}{append.dim}},
+\code{\LinkA{fix.datatypes}{fix.datatypes}}, \code{\LinkA{parse.gctx}{parse.gctx}},
+\code{\LinkA{process\_ids}{process.Rul.ids}}, \code{\LinkA{read.gctx.ids}{read.gctx.ids}},
+\code{\LinkA{read.gctx.meta}{read.gctx.meta}},
+\code{\LinkA{write.gctx.meta}{write.gctx.meta}}, \code{\LinkA{write.gct}{write.gct}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+# assume ds is a GCT object
+write.gctx(ds, "my/desired/outpath/and/filename")
+
+## End(Not run)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{write.gmt}{Write a nested list to a GMT file}{write.gmt}
+%
+\begin{Description}\relax
+Write a nested list to a GMT file
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+write.gmt(lst, fname)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{lst}] the nested list to write. See \code{details}.
+
+\item[\code{fname}] the desired file name
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+\code{lst} needs to be a nested list where each 
+sub-list is itself a list with the following fields:
+- \code{head}: the name of the data
+- \code{desc}: description of the corresponding data
+- \code{len}: the number of data items
+- \code{entry}: a vector of the data items
+\end{Details}
+%
+\begin{SeeAlso}\relax
+\LinkA{http://clue.io/help}{http://clue.io/help} for details on the GMT file format
+
+Other CMap parsing functions: \code{\LinkA{parse.gmt}{parse.gmt}},
+\code{\LinkA{parse.gmx}{parse.gmx}}, \code{\LinkA{parse.grp}{parse.grp}},
+\code{\LinkA{write.grp}{write.grp}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+write.gmt(gene_set, "gene_set.gmt")
+
+## End(Not run)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{write.grp}{Write a vector to a GRP file}{write.grp}
+%
+\begin{Description}\relax
+Write a vector to a GRP file
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+write.grp(vals, fname)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{vals}] the vector of values to be written
+
+\item[\code{fname}] the desired file name
+\end{ldescription}
+\end{Arguments}
+%
+\begin{SeeAlso}\relax
+\LinkA{http://clue.io/help}{http://clue.io/help} for details on the GRP file format
+
+Other CMap parsing functions: \code{\LinkA{parse.gmt}{parse.gmt}},
+\code{\LinkA{parse.gmx}{parse.gmx}}, \code{\LinkA{parse.grp}{parse.grp}},
+\code{\LinkA{write.gmt}{write.gmt}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+write.grp(letters, "letter.grp")
+
+## End(Not run)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{write.tbl}{Write a \code{data.frame} to a tab-delimited text file}{write.tbl}
+%
+\begin{Description}\relax
+Write a \code{data.frame} to a tab-delimited text file
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+write.tbl(tbl, ofile, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{tbl}] the \code{data.frame} to be written
+
+\item[\code{ofile}] the desired file name
+
+\item[\code{...}] additional arguments passed on to \code{write.table}
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+This method simply calls \code{write.table} with some
+preset arguments that generate a unquoated, tab-delimited file
+without row names.
+\end{Details}
+%
+\begin{SeeAlso}\relax
+\code{\LinkA{write.table}{write.table}}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+## Not run: 
+write.tbl(cdesc_char, "col_meta.txt")
+
+## End(Not run)
+
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

@@ -1,0 +1,220 @@
+* using log directory ‘/home/sid/Desktop/Elucidata/cmapR.Rcheck’
+* using R version 3.4.4 (2018-03-15)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘cmapR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘cmapR’ version ‘1.0.1’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  docs/build/html/.buildinfo
+These were most likely included in error. See section ‘Package
+structure’ in the ‘Writing R Extensions’ manual.
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cmapR’ can be installed ... OK
+* checking installed package size ... NOTE
+  installed size is  6.7Mb
+  sub-directories of 1Mb or more:
+    data      2.3Mb
+    extdata   4.1Mb
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... NOTE
+Malformed Description field: should contain one or more complete sentences.
+Deprecated license: BSD
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Missing or unexported object: ‘rhdf5::h5closeAll’
+There are ::: calls to the package's namespace in its code. A package
+  almost never needs to use ::: for its own objects:
+  ‘threshold’
+* checking S3 generic/method consistency ... WARNING
+merge:
+  function(x, y, ...)
+merge.gct:
+  function(g1, g2, dimension, matrix_only)
+
+subset:
+  function(x, ...)
+subset.gct:
+  function(g, rid, cid)
+
+update:
+  function(object, ...)
+update.gctx:
+  function(x, ofile, rid, cid)
+
+See section ‘Generic functions and methods’ in the ‘Writing R
+Extensions’ manual.
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+extract.gct: warning in annotate.gct(g, rdesc, dim = "row", keyfield =
+  row_keyfield): partial argument match of 'dim' to 'dimension'
+extract.gct: warning in annotate.gct(g, cdesc, dim = "col", keyfield =
+  col_keyfield): partial argument match of 'dim' to 'dimension'
+distil: no visible global function definition for ‘cor’
+robust.zscore: no visible global function definition for ‘median’
+annotate.gct,GCT: no visible global function definition for ‘fread’
+melt.gct,GCT: no visible binding for global variable ‘value’
+Undefined global functions or variables:
+  cor fread median value
+Consider adding
+  importFrom("stats", "cor", "median")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... WARNING
+Missing link or links in documentation object 'melt.gct.Rd':
+  ‘data.table::melt’
+
+Missing link or links in documentation object 'merge_with_precedence.Rd':
+  ‘rdesc’ ‘cdesc’
+
+Missing link or links in documentation object 'parse.gmt.Rd':
+  ‘http://clue.io/help’
+
+Missing link or links in documentation object 'parse.gmx.Rd':
+  ‘http://clue.io/help’
+
+Missing link or links in documentation object 'parse.grp.Rd':
+  ‘http://clue.io/help’
+
+Missing link or links in documentation object 'write.gmt.Rd':
+  ‘http://clue.io/help’
+
+Missing link or links in documentation object 'write.grp.Rd':
+  ‘http://clue.io/help’
+
+See section 'Cross-references' in the 'Writing R Extensions' manual.
+
+* checking for missing documentation entries ... WARNING
+Undocumented S4 methods:
+  generic 'annotate.gct' and siglist 'GCT'
+  generic 'dim' and siglist 'GCT'
+  generic 'max' and siglist 'GCT'
+  generic 'melt.gct' and siglist 'GCT'
+  generic 'merge.gct' and siglist 'GCT,GCT'
+  generic 'min' and siglist 'GCT'
+  generic 'range' and siglist 'GCT'
+  generic 'rank.gct' and siglist 'GCT'
+  generic 'subset.gct' and siglist 'GCT'
+  generic 'transpose.gct' and siglist 'GCT'
+All user-level objects in a package (including S4 classes and methods)
+should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... NOTE
+S3 methods shown with full name in documentation object 'merge.gct':
+  ‘merge.gct’
+
+S3 methods shown with full name in documentation object 'subset.gct':
+  ‘subset.gct’
+
+The \usage entries for S3 methods should use the \method markup and not
+their full name.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... WARNING
+  
+  Note: significantly better compression could be obtained
+        by using R CMD build --resave-data
+               old_size new_size compress
+  ds.RData        1.2Mb    900Kb       xz
+  kd_gct.RData    1.1Mb    808Kb       xz
+* checking line endings in Makefiles ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking examples ... ERROR
+Running examples in ‘cmapR-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: align_matrices
+> ### Title: Align the rows and columns of two (or more) matrices
+> ### Aliases: align_matrices
+> 
+> ### ** Examples
+> 
+> # construct some example matrices
+> m1 <- matrix(rnorm(20), nrow=4)
+> rownames(m1) <- letters[1:4]
+> colnames(m1) <- LETTERS[1:5]
+> m2 <- matrix(rnorm(20), nrow=5)
+> rownames(m2) <- letters[1:5]
+> colnames(m2) <- LETTERS[1:4]
+> m1
+           A          B          C           D           E
+a -0.6264538  0.3295078  0.5757814 -0.62124058 -0.01619026
+b  0.1836433 -0.8204684 -0.3053884 -2.21469989  0.94383621
+c -0.8356286  0.4874291  1.5117812  1.12493092  0.82122120
+d  1.5952808  0.7383247  0.3898432 -0.04493361  0.59390132
+> m2
+            A           B           C          D
+a  0.91897737 -0.05612874  1.35867955 -0.4149946
+b  0.78213630 -0.15579551 -0.10278773 -0.3942900
+c  0.07456498 -1.47075238  0.38767161 -0.0593134
+d -1.98935170 -0.47815006 -0.05380504  1.1000254
+e  0.61982575  0.41794156 -1.37705956  0.7631757
+> 
+> # align them, padding with NA and returning a 3D array
+> align_matrices(m1, m2)
+, , 1
+
+           A          B          C           D           E
+a -0.6264538  0.3295078  0.5757814 -0.62124058 -0.01619026
+b  0.1836433 -0.8204684 -0.3053884 -2.21469989  0.94383621
+c -0.8356286  0.4874291  1.5117812  1.12493092  0.82122120
+d  1.5952808  0.7383247  0.3898432 -0.04493361  0.59390132
+e         NA         NA         NA          NA          NA
+
+, , 2
+
+            A           B           C          D  E
+a  0.91897737 -0.05612874  1.35867955 -0.4149946 NA
+b  0.78213630 -0.15579551 -0.10278773 -0.3942900 NA
+c  0.07456498 -1.47075238  0.38767161 -0.0593134 NA
+d -1.98935170 -0.47815006 -0.05380504  1.1000254 NA
+e  0.61982575  0.41794156 -1.37705956  0.7631757 NA
+
+> 
+> # align them, not padding and retuning a list
+> align_matrices(m1, m2, na.pad=F, as.3D=F)
+Error in align_matrices(m1, m2, na.pad = F, as.3D = F) : 
+  F used instead of FALSE
+Execution halted
+* checking for unstated dependencies in ‘tests’ ... WARNING
+'library' or 'require' call not declared from: ‘testthat’
+* checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Complete output:
+  > library(testthat)
+  Error in library(testthat) : there is no package called 'testthat'
+  Execution halted
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+* checking PDF version of manual without hyperrefs or index ... ERROR
+Re-running with no redirection of stdout/stderr.
+* DONE
+Status: 3 ERRORs, 6 WARNINGs, 6 NOTEs
